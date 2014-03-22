@@ -1,4 +1,5 @@
 Memex::Application.routes.draw do
+  devise_for :users
   post 'api/log' => 'url#log'
   post 'api/search' => 'url#search'
   root 'url#dashboard'
