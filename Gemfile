@@ -47,3 +47,5 @@ end
 gem 'patron'
 gem 'flex-models'
 gem 'foundation-rails'
+gem 'unicorn'
+gem 'clockwork'
