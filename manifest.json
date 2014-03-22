@@ -1,0 +1,24 @@
+{
+  "name": "Test",
+  "description": "Make the current page red",
+  "version": "2.0",
+  "permissions": [
+    "tabs"
+  ],
+  "background": {
+    "scripts": ["build/background.js"],
+    "persistent": false
+  },
+  "options_page": "options.html",
+  "content_scripts": [
+     {
+       "matches": ["<all_urls>"],
+       "js": ["jquery.js", "build/content.js"]
+     }
+   ],
+  "browser_action": {
+    "default_title": "Make this page red",
+    "default_icon": "icon.png"
+  },
+  "manifest_version": 2
+}
