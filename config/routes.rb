@@ -1,5 +1,7 @@
 Memex::Application.routes.draw do
   post 'api/log' => 'url#log'
+  post 'api/search' => 'url#search'
+  root 'url#dashboard'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

@@ -1,11 +1,17 @@
 class UrlController < ApplicationController
+  respond_to :json
   skip_before_filter :verify_authenticity_token, :only => [:log]
   def log
     Url.create url: params[:url], body: params[:html]
     render :json => {}
   end
 
-  def search
+  def dashboard
 
+  end
+
+  def search
+    urls = Url.terms(body: params[:q]).all
+    respond_with urls, location: root_path
   end
 end

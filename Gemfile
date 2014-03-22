@@ -46,3 +46,4 @@ end
 
 gem 'patron'
 gem 'flex-models'
+gem 'foundation-rails'
