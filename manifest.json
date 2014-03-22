@@ -3,7 +3,7 @@
   "description": "Make the current page red",
   "version": "2.0",
   "permissions": [
-    "tabs"
+    "tabs", "storage"
   ],
   "background": {
     "scripts": ["build/background.js"],
