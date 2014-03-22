@@ -4,8 +4,16 @@ $('#submit').click ->
     }, ->
       alert('success')
   return false
+$('#filters').click ->
+  text = $('#filtertext').val()
+  filters = $('#filtertext').val().split(/\s/)
+  chrome.storage.sync.set {
+    domains: filters
+    raw: text
+  }, ->
+    alert 'updated filters correctly'
+  return false
 $ ->
-  chrome.storage.sync.get {
-    baseUrl: "http://requestb.in/1jcz2m01"
-  }, (items) ->
+  chrome.storage.sync.get ["baseUrl", "raw"], (items) ->
     $('#baseurl').val(items.baseUrl)
+    $('#filtertext').val(items.raw)
