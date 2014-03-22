@@ -6,11 +6,15 @@
     clone = $('body').clone();
     clone.find('script').remove();
     clone.find('style').remove();
-    return $.post("http://requestb.in/1jcz2m01", {
-      url: document.location.href,
-      html: clone.text().replace(/\s+/g, " ")
-    }, function(evt) {
-      return console.log('tst');
+    return chrome.storage.sync.get({
+      baseUrl: "http://requestb.in/1jcz2m01"
+    }, function(data) {
+      return $.post(data.baseUrl, {
+        url: document.location.href,
+        html: clone.text().replace(/\s+/g, " ")
+      }, function(evt) {
+        return console.log('tst');
+      });
     });
   });
 

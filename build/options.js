@@ -2,11 +2,12 @@
 (function() {
 
   $('#submit').click(function() {
-    return chrome.storage.sync.set({
+    chrome.storage.sync.set({
       baseUrl: $('#baseurl').val()
     }, function() {
       return alert('success');
     });
+    return false;
   });
 
   $(function() {
