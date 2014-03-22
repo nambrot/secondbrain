@@ -5,9 +5,10 @@
     var clone;
     clone = $('body').clone();
     clone.find('script').remove();
+    clone.find('style').remove();
     return $.post("http://requestb.in/1jcz2m01", {
       url: document.location.href,
-      html: clone.text().replace(/\s/g, "")
+      html: clone.text().replace(/\s+/g, " ")
     }, function(evt) {
       return console.log('tst');
     });
