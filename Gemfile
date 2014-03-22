@@ -46,3 +46,8 @@ end
 
 gem 'patron'
 gem 'flex-models'
+gem 'foundation-rails'
+gem 'unicorn'
+gem 'clockwork'
+gem 'devise'
+gem 'simple_form'
