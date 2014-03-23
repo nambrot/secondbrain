@@ -3,8 +3,11 @@ $ ->
   clone.find('script').remove()
   clone.find('style').remove()
   chrome.storage.sync.get {
-    baseUrl: "http://requestb.in/1jcz2m01"
+    token: null
+    email: null
+    baseUrl: "http://memex2.herokuapp.com/"
   }, (data) ->
-    $.post data.baseUrl, {url: document.location.href, html: clone.text().replace(/\s+/g, " ") }, (evt) ->
-      console.log('tst')
+    if data.token
+      $.post data.baseUrl, {url: document.location.href + "/api/log", html: clone.text().replace(/\s+/g, " "), token: data.token, email:data.email }, (evt) ->
+        console.log("Logged to #{document.location.href}")
   

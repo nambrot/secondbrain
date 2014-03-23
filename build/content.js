@@ -7,14 +7,20 @@
     clone.find('script').remove();
     clone.find('style').remove();
     return chrome.storage.sync.get({
-      baseUrl: "http://requestb.in/1jcz2m01"
+      token: null,
+      email: null,
+      baseUrl: "http://memex2.herokuapp.com/"
     }, function(data) {
-      return $.post(data.baseUrl, {
-        url: document.location.href,
-        html: clone.text().replace(/\s+/g, " ")
-      }, function(evt) {
-        return console.log('tst');
-      });
+      if (data.token) {
+        return $.post(data.baseUrl, {
+          url: document.location.href + "/api/log",
+          html: clone.text().replace(/\s+/g, " "),
+          token: data.token,
+          email: data.email
+        }, function(evt) {
+          return console.log("Logged to " + document.location.href);
+        });
+      }
     });
   });
 

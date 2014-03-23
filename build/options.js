@@ -3,16 +3,31 @@
 
   $('#submit').click(function() {
     chrome.storage.sync.set({
-      baseUrl: $('#baseurl').val()
+      baseUrl: $('#baseurl').val(),
+      token: null,
+      email: null
     }, function() {
-      return alert('success');
+      return chrome.storage.sync.get({
+        token: null,
+        baseUrl: "http://memex2.herokuapp.com/"
+      }, function(data) {
+        if (!(data.token != null)) {
+          return chrome.tabs.create({
+            url: "" + data.baseUrl + "/get_token"
+          }, function(tab) {
+            return chrome.tabs.executeScript(tab.id, {
+              file: 'build/fetch_token.js'
+            });
+          });
+        }
+      });
     });
     return false;
   });
 
   $(function() {
     return chrome.storage.sync.get({
-      baseUrl: "http://requestb.in/1jcz2m01"
+      baseUrl: "http://memex2.herokuapp.com/"
     }, function(items) {
       return $('#baseurl').val(items.baseUrl);
     });
