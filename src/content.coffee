@@ -1,6 +1,5 @@
 $ ->
-  chrome.storage.sync.get "domains", (data) ->
-    debugger;
+  chrome.storage.sync.get {"domains": []}, (data) ->
     isMatch = data.domains.some (domain) ->
       document.location.host.match domain
     if (isMatch)
@@ -14,5 +13,5 @@ $ ->
       baseUrl: "http://memex2.herokuapp.com/"
     }, (data) ->
       if data.token
-        $.post data.baseUrl, {url: document.location.href + "/api/log", html: clone.text().replace(/\s+/g, " "), token: data.token, email:data.email }, (evt) ->
-        console.log("Logged to #{document.location.href}")
+        $.post (data.baseUrl + "/api/log"), {url: document.location.href, html: clone.text().replace(/\s+/g, " "), user_token: data.token, user_email:data.email }, (evt) ->
+        console.log("Logged to #{data.baseUrl}")

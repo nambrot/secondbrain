@@ -2,8 +2,9 @@
 (function() {
 
   $(function() {
-    return chrome.storage.sync.get("domains", function(data) {
-      debugger;
+    return chrome.storage.sync.get({
+      "domains": []
+    }, function(data) {
       var clone, isMatch;
       isMatch = data.domains.some(function(domain) {
         return document.location.host.match(domain);
@@ -20,13 +21,13 @@
         baseUrl: "http://memex2.herokuapp.com/"
       }, function(data) {
         if (data.token) {
-          $.post(data.baseUrl, {
-            url: document.location.href + "/api/log",
+          $.post(data.baseUrl + "/api/log", {
+            url: document.location.href,
             html: clone.text().replace(/\s+/g, " "),
-            token: data.token,
-            email: data.email
+            user_token: data.token,
+            user_email: data.email
           }, function(evt) {});
-          return console.log("Logged to " + document.location.href);
+          return console.log("Logged to " + data.baseUrl);
         }
       });
     });
