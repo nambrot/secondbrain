@@ -1,20 +1,12 @@
-<div class="12 columns">
-  <h1 class="subheader">
-    Search it
-  </h1>
-  
-  
-</div>
 
 <div class="row">
-  <input id='searchfield' type="textfield">
+  <form>
+    <input id='searchfield' type="textfield">
+  </form>
 </div>
 
 <div class="row">
   <table id='results' class="">
-    <thead>
-      <th>URLs</th>
-    </thead>
     <tbody>
       <% if !@urls.blank? %>
         <% for url in @urls %>

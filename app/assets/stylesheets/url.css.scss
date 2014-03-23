@@ -1,3 +1,33 @@
 // Place all the styles related to the Url controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+body{
+  background-image:url("/skulls.png");
+  background-repeat:repeat;
+}
+
+#container {
+  padding-top: 20px;
+}
+
+table tr.even, table tr.alt, table tr:nth-of-type(even), tr, table {
+  background: none;
+  border:none;
+}
+
+#searchfield{
+  font-size: 30px;
+  align-self: center;
+  height:60px;
+  width:100%;
+  padding: 0 10px;
+  vertical-align: middle;
+  margin: 20px;
+  background-color: rgba(126, 42, 35, 0.32);
+  border: none;
+  color: white;
+  padding-left: 20px;
+  outline: none;
+}
