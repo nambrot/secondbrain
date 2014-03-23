@@ -16,7 +16,15 @@
       <th>URLs</th>
     </thead>
     <tbody>
-      
+      <% if !@urls.blank? %>
+        <% for url in @urls %>
+          <tr>
+            <td><a href="<%= url.url %>"><%= url.url %></a></td>
+          </tr>
+        <% end %>
+      <% else %>
+        
+      <% end %>
     </tbody>
   </table>
 </div>
