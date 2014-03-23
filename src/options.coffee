@@ -13,8 +13,22 @@ $('#submit').click ->
             chrome.tabs.create url: "#{data.baseUrl}/get_token", (tab) ->
               chrome.tabs.executeScript(tab.id, {file: 'build/fetch_token.js'});
   return false
+$('#filters').click ->
+  text = $('#filtertext').val()
+  filters = $('#filtertext').val().split(/\s/)
+  chrome.storage.sync.set {
+    domains: filters
+    raw: text
+  }, ->
+    alert 'updated filters correctly'
+  return false
+
 $ ->
   chrome.storage.sync.get {
     baseUrl: "http://memex2.herokuapp.com/"
   }, (items) ->
     $('#baseurl').val(items.baseUrl)
+  chrome.storage.sync.get ["baseUrl", "raw"], (items) ->
+    $('#baseurl').val(items.baseUrl)
+    $('#filtertext').val(items.raw)
+

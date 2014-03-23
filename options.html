@@ -1,10 +1,21 @@
 <html>
-  <head></head>
+  <head>
+    <link href="http://netdna.bootstrapcdn.com/bootswatch/3.1.1/flatly/bootstrap.min.css" rel="stylesheet">
+  </head>
   <body>
-    <h1>Options</h1>
+    <div class="container">
+    <h1>Configuration</h1>
     <label for="">Base URL</label>
     <input id='baseurl' type="textfield" />
-    <a href="" id="submit">Save</a>
+    <a class="btn btn-info btn-small" href="" id="submit">Save</a>
+    <br/>
+    <hr/>
+    <label for="">Domain Filters (e.g google.com OR store.apple.com)</label>
+    <div class="row">
+        <textarea class="form-control" id='filtertext' type="textarea" rows="10"></textarea>
+    </div>
+        <a class="btn btn-info btn-small" href="" id="filters">Update Filters</a>
+    </div>
     <script src='jquery.js'></script>
     <script src='build/options.js'></script>
   </body>

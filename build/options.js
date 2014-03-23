@@ -25,11 +25,28 @@
     return false;
   });
 
+  $('#filters').click(function() {
+    var filters, text;
+    text = $('#filtertext').val();
+    filters = $('#filtertext').val().split(/\s/);
+    chrome.storage.sync.set({
+      domains: filters,
+      raw: text
+    }, function() {
+      return alert('updated filters correctly');
+    });
+    return false;
+  });
+
   $(function() {
-    return chrome.storage.sync.get({
+    chrome.storage.sync.get({
       baseUrl: "http://memex2.herokuapp.com/"
     }, function(items) {
       return $('#baseurl').val(items.baseUrl);
+    });
+    return chrome.storage.sync.get(["baseUrl", "raw"], function(items) {
+      $('#baseurl').val(items.baseUrl);
+      return $('#filtertext').val(items.raw);
     });
   });
 

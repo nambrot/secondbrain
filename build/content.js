@@ -2,25 +2,33 @@
 (function() {
 
   $(function() {
-    var clone;
-    clone = $('body').clone();
-    clone.find('script').remove();
-    clone.find('style').remove();
-    return chrome.storage.sync.get({
-      token: null,
-      email: null,
-      baseUrl: "http://memex2.herokuapp.com/"
-    }, function(data) {
-      if (data.token) {
-        return $.post(data.baseUrl, {
-          url: document.location.href + "/api/log",
-          html: clone.text().replace(/\s+/g, " "),
-          token: data.token,
-          email: data.email
-        }, function(evt) {
-          return console.log("Logged to " + document.location.href);
-        });
+    return chrome.storage.sync.get("domains", function(data) {
+      debugger;
+      var clone, isMatch;
+      isMatch = data.domains.some(function(domain) {
+        return document.location.host.match(domain);
+      });
+      if (isMatch) {
+        return;
       }
+      clone = $('body').clone();
+      clone.find('script').remove();
+      clone.find('style').remove();
+      return chrome.storage.sync.get({
+        token: null,
+        email: null,
+        baseUrl: "http://memex2.herokuapp.com/"
+      }, function(data) {
+        if (data.token) {
+          $.post(data.baseUrl, {
+            url: document.location.href + "/api/log",
+            html: clone.text().replace(/\s+/g, " "),
+            token: data.token,
+            email: data.email
+          }, function(evt) {});
+          return console.log("Logged to " + document.location.href);
+        }
+      });
     });
   });
 
