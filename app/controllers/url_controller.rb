@@ -14,7 +14,10 @@ class UrlController < ApplicationController
   end
 
   def search
-    urls = Url.default.terms(body: params[:q], user_id: current_user.id)
+    urls = Url.default.terms(user_id: current_user.id).query("body:'#{params[:q]}'").all
+    if params[:q].blank?
+      urls = Url.default.terms(user_id: current_user.id).all
+    end
     respond_with urls, location: root_path
   end
 
