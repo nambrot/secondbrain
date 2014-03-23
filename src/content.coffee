@@ -1,12 +1,19 @@
 $ ->
   chrome.storage.sync.get {"domains": []}, (data) ->
-    isMatch = data.domains.some (domain) ->
+
+    # only accept http (no https)
+    return unless document.location.protocol.match(/http[^s]/)
+
+    # check if blacklisted domain
+    return if data.domains.some (domain) ->
       document.location.host.match domain
-    if (isMatch)
-      return;
+
+    # Extract text
     clone = $('body').clone()
     clone.find('script').remove()
     clone.find('style').remove()
+
+    # Log result
     chrome.storage.sync.get {
       token: null
       email: null
