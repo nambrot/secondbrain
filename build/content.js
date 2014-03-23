@@ -27,7 +27,7 @@
             user_token: data.token,
             user_email: data.email
           }, function(evt) {});
-          return console.log("Logged to " + data.baseUrl);
+          return console.log("Memex Logged to " + data.baseUrl);
         }
       });
     });

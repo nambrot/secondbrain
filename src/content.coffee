@@ -14,4 +14,4 @@ $ ->
     }, (data) ->
       if data.token
         $.post (data.baseUrl + "/api/log"), {url: document.location.href, html: clone.text().replace(/\s+/g, " "), user_token: data.token, user_email:data.email }, (evt) ->
-        console.log("Logged to #{data.baseUrl}")
+        console.log("Memex Logged to #{data.baseUrl}")

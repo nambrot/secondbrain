@@ -11,5 +11,5 @@ class Url
   validate :body, presence: true
   validate :user_id, presence: true
 
-  
+  scope :default, sort(created_at: 'desc').size(25)
 end

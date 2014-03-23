@@ -10,11 +10,11 @@ class UrlController < ApplicationController
   end
 
   def dashboard
-    @urls = Url.terms(user_id: current_user.id).size(25)
+    @urls = Url.terms(user_id: current_user.id).default
   end
 
   def search
-    urls = Url.terms(body: params[:q], user_id: current_user.id).size(25)
+    urls = Url.terms(body: params[:q], user_id: current_user.id).default
     respond_with urls, location: root_path
   end
 
