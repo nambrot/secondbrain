@@ -3,9 +3,24 @@
   $(function() {
     return window.setTimeout(function() {
       return chrome.storage.sync.get({
-        "domains": []
+        domains: [],
+        email: null,
+        token: null,
+        baseUrl: "http://memex2.herokuapp.com"
       }, function(data) {
-        var clone;
+        var txt;
+        if (!data.token) {
+          return;
+        }
+        if (!data.email) {
+          return;
+        }
+        if (document.location.href.match(data.baseUrl)) {
+          return;
+        }
+        if (!document.location.host.match(".")) {
+          return;
+        }
         if (!document.location.protocol.match(/http[^s]/)) {
           return;
         }
@@ -14,23 +29,17 @@
         })) {
           return;
         }
-        clone = $('body').clone();
-        clone.find('script').remove();
-        clone.find('style').remove();
-        return chrome.storage.sync.get({
-          token: null,
-          email: null,
-          baseUrl: "http://memex2.herokuapp.com/"
-        }, function(data) {
-          if (data.token) {
-            $.post(data.baseUrl + "/api/log", {
-              url: document.location.href,
-              html: clone.text().replace(/\s+/g, " "),
-              user_token: data.token,
-              user_email: data.email
-            }, function(evt) {});
-            return console.log("Memex Logged to " + data.baseUrl);
-          }
+        txt = $('body').clone;
+        txt.find('script').remove;
+        txt.find('style').remove;
+        txt = txt.text().replace(/\s+/g, " ");
+        return $.post(data.baseUrl + "/api/log", {
+          url: document.location.href,
+          html: txt,
+          user_token: data.token,
+          user_email: data.email
+        }, function(event) {
+          return console.log("Memex Logged to " + data.baseUrl);
         });
       });
     }, 10000);

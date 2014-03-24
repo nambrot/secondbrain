@@ -39,7 +39,7 @@
 
   $(function() {
     chrome.storage.sync.get({
-      baseUrl: "http://memex2.herokuapp.com/"
+      baseUrl: "http://memex2.herokuapp.com"
     }, function(items) {
       return $('#baseurl').val(items.baseUrl);
     });
