@@ -8,7 +8,7 @@
         token: null,
         baseUrl: "http://memex2.herokuapp.com"
       }, function(data) {
-        var txt;
+        var domains, txt;
         if (!data.token) {
           return;
         }
@@ -24,14 +24,15 @@
         if (!document.location.protocol.match(/http[^s]/)) {
           return;
         }
-        if (data.domains.some(function(domain) {
+        domains = data.domains.concat(["localhost"]);
+        if (domains.some(function(domain) {
           return document.location.host.match(domain);
         })) {
           return;
         }
-        txt = $('body').clone;
-        txt.find('script').remove;
-        txt.find('style').remove;
+        txt = $('body').clone();
+        txt.find('script').remove();
+        txt.find('style').remove();
         txt = txt.text().replace(/\s+/g, " ");
         return $.post(data.baseUrl + "/api/log", {
           url: document.location.href,
@@ -39,7 +40,7 @@
           user_token: data.token,
           user_email: data.email
         }, function(event) {
-          return console.log("Memex Logged to " + data.baseUrl);
+          return console.log("Page logged to memex " + data.baseUrl);
         });
       });
     }, 10000);
