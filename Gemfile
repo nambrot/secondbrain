@@ -44,7 +44,7 @@ end
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
-gem 'patron'
+gem 'rest-client'
 gem 'flex-models'
 gem 'foundation-rails'
 gem 'unicorn'
